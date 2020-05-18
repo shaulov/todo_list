@@ -49,6 +49,7 @@ const tasks = [{
     renderAllTasks(objOfTasks);
     form.addEventListener('submit', onFormSubmitHandler);
     listContainer.addEventListener('click', onDeleteHandler);
+    listContainer.addEventListener('click', onCompleteHandler);
 
     function renderAllTasks(tasksList) {
         if (!tasksList) {
@@ -77,6 +78,14 @@ const tasks = [{
         span.textContent = title;
         span.style.fontWeight = 'bold';
 
+        const btnContainer = document.createElement('div');
+        btnContainer.classList.add('ml-auto');
+
+        const completeBtn = document.createElement('button');
+        completeBtn.textContent = 'Complete task';
+        completeBtn.classList.add('btn', 'btn-success', 'complete-btn');
+        completeBtn.style.marginRight = '5px';
+
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'Delete task';
         deleteBtn.classList.add('btn', 'btn-danger', 'ml-auto', 'delete-btn');
@@ -86,7 +95,9 @@ const tasks = [{
         article.classList.add('mt-2', 'w-100');
 
         li.appendChild(span);
-        li.appendChild(deleteBtn);
+        btnContainer.appendChild(completeBtn);
+        btnContainer.appendChild(deleteBtn);
+        li.appendChild(btnContainer);
         li.appendChild(article);
 
         return li;
@@ -141,12 +152,23 @@ const tasks = [{
     function onDeleteHandler({
         target
     }) {
-
         if (target.classList.contains('delete-btn')) {
             const parent = target.closest('[data-task-id]');
             const id = parent.dataset.taskId;
             const confirmed = deleteTask(id);
             deleteTaskFromHtml(confirmed, parent);
+        }
+    }
+
+    function onCompleteHandler({
+        target
+    }) {
+        if (target.classList.contains('complete-btn')) {
+            const parent = target.closest('[data-task-id]');
+            parent.classList.toggle('completed');
+            target.classList.toggle('btn-success');
+            target.classList.toggle('btn-secondary');
+
         }
     }
 

@@ -4,7 +4,7 @@ const tasks = [{
         _id: '000001',
         complited: true,
         body: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.',
-        title: 'Mollitia, quod commodi',
+        title: 'Quod commodi',
     },
     {
         _id: '000002',
@@ -16,19 +16,19 @@ const tasks = [{
         _id: '000003',
         complited: false,
         body: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.',
-        title: 'Mollitia, quod commodi',
+        title: 'Collitia, quod commodi',
     },
     {
         _id: '000004',
         complited: true,
         body: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.',
-        title: 'Mollitia, quod commodi',
+        title: 'Commodi mollitia, quod',
     },
     {
         _id: '000005',
         complited: false,
         body: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.',
-        title: 'Mollitia, quod commodi',
+        title: 'Pablo Hernandes Juan Escobars',
     },
 ];
 
@@ -48,6 +48,7 @@ const tasks = [{
     // Events
     renderAllTasks(objOfTasks);
     form.addEventListener('submit', onFormSubmitHandler);
+    listContainer.addEventListener('click', onDeleteHandler);
 
     function renderAllTasks(tasksList) {
         if (!tasksList) {
@@ -70,6 +71,7 @@ const tasks = [{
     } = {}) {
         const li = document.createElement('li');
         li.classList.add('list-group-item', 'd-flex', 'align-item-center', 'flex-wrap', 'mt-2');
+        li.dataset.taskId = _id;
 
         const span = document.createElement('span');
         span.textContent = title;
@@ -119,6 +121,33 @@ const tasks = [{
         return {
             ...newTask
         };
+    }
+
+    function deleteTask(id) {
+        const {
+            title
+        } = objOfTasks[id];
+        const isConfirm = confirm(`You want delete this task '${title}'?`);
+        if (!isConfirm) return isConfirm;
+        delete objOfTasks[id];
+        return isConfirm;
+    }
+
+    function deleteTaskFromHtml(confirmed, el) {
+        if (!confirmed) return;
+        el.remove();
+    }
+
+    function onDeleteHandler({
+        target
+    }) {
+
+        if (target.classList.contains('delete-btn')) {
+            const parent = target.closest('[data-task-id]');
+            const id = parent.dataset.taskId;
+            const confirmed = deleteTask(id);
+            deleteTaskFromHtml(confirmed, parent);
+        }
     }
 
 }(tasks));

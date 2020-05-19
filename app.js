@@ -1,34 +1,34 @@
 // Form
 // List of tasks
 const tasks = [{
-        _id: '000001',
+        _id: "000001",
         complited: true,
-        body: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.',
-        title: 'Quod commodi',
+        body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
+        title: "Quod commodi",
     },
     {
-        _id: '000002',
+        _id: "000002",
         complited: false,
-        body: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.',
-        title: 'Mollitia, quod commodi',
+        body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
+        title: "Mollitia, quod commodi",
     },
     {
-        _id: '000003',
+        _id: "000003",
         complited: false,
-        body: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.',
-        title: 'Collitia, quod commodi',
+        body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
+        title: "Collitia, quod commodi",
     },
     {
-        _id: '000004',
+        _id: "000004",
         complited: true,
-        body: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.',
-        title: 'Commodi mollitia, quod',
+        body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
+        title: "Commodi mollitia, quod",
     },
     {
-        _id: '000005',
+        _id: "000005",
         complited: false,
-        body: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.',
-        title: 'Pablo Hernandes Juan Escobars',
+        body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
+        title: "Pablo Hernandes Juan Escobars",
     },
 ];
 
@@ -40,94 +40,96 @@ const tasks = [{
 
     const themes = {
         default: {
-            '--base-text-color': '#212529',
-            '--header-bg': '#007bff',
-            '--header-text-color': '#fff',
-            '--default-btn-bg': '#007bff',
-            '--default-btn-text-color': '#fff',
-            '--default-btn-hover-bg': '#0069d9',
-            '--default-btn-border-color': '#0069d9',
-            '--danger-btn-bg': '#dc3545',
-            '--danger-btn-text-color': '#fff',
-            '--danger-btn-hover-bg': '#bd2130',
-            '--danger-btn-border-color': '#dc3545',
-            '--input-border-color': '#ced4da',
-            '--input-bg-color': '#fff',
-            '--input-text-color': '#495057',
-            '--input-focus-bg-color': '#fff',
-            '--input-focus-text-color': '#495057',
-            '--input-focus-border-color': '#80bdff',
-            '--input-focus-box-shadow': '0 0 0 0.2rem rgba(0, 123, 255, 0.25)',
+            "--base-text-color": "#212529",
+            "--header-bg": "#007bff",
+            "--header-text-color": "#fff",
+            "--default-btn-bg": "#007bff",
+            "--default-btn-text-color": "#fff",
+            "--default-btn-hover-bg": "#0069d9",
+            "--default-btn-border-color": "#0069d9",
+            "--danger-btn-bg": "#dc3545",
+            "--danger-btn-text-color": "#fff",
+            "--danger-btn-hover-bg": "#bd2130",
+            "--danger-btn-border-color": "#dc3545",
+            "--input-border-color": "#ced4da",
+            "--input-bg-color": "#fff",
+            "--input-text-color": "#495057",
+            "--input-focus-bg-color": "#fff",
+            "--input-focus-text-color": "#495057",
+            "--input-focus-border-color": "#80bdff",
+            "--input-focus-box-shadow": "0 0 0 0.2rem rgba(0, 123, 255, 0.25)",
         },
         dark: {
-            '--base-text-color': '#212529',
-            '--header-bg': '#343a40',
-            '--header-text-color': '#fff',
-            '--default-btn-bg': '#58616b',
-            '--default-btn-text-color': '#fff',
-            '--default-btn-hover-bg': '#292d31',
-            '--default-btn-border-color': '#343a40',
-            '--default-btn-focus-box-shadow': '0 0 0 0.2rem rgba(141, 143, 146, 0.25)',
-            '--danger-btn-bg': '#b52d3a',
-            '--danger-btn-text-color': '#fff',
-            '--danger-btn-hover-bg': '#88222c',
-            '--danger-btn-border-color': '#88222c',
-            '--input-border-color': '#ced4da',
-            '--input-bg-color': '#fff',
-            '--input-text-color': '#495057',
-            '--input-focus-bg-color': '#fff',
-            '--input-focus-text-color': '#495057',
-            '--input-focus-border-color': '#78818a',
-            '--input-focus-box-shadow': '0 0 0 0.2rem rgba(141, 143, 146, 0.25)',
+            "--base-text-color": "#212529",
+            "--header-bg": "#343a40",
+            "--header-text-color": "#fff",
+            "--default-btn-bg": "#58616b",
+            "--default-btn-text-color": "#fff",
+            "--default-btn-hover-bg": "#292d31",
+            "--default-btn-border-color": "#343a40",
+            "--default-btn-focus-box-shadow": "0 0 0 0.2rem rgba(141, 143, 146, 0.25)",
+            "--danger-btn-bg": "#b52d3a",
+            "--danger-btn-text-color": "#fff",
+            "--danger-btn-hover-bg": "#88222c",
+            "--danger-btn-border-color": "#88222c",
+            "--input-border-color": "#ced4da",
+            "--input-bg-color": "#fff",
+            "--input-text-color": "#495057",
+            "--input-focus-bg-color": "#fff",
+            "--input-focus-text-color": "#495057",
+            "--input-focus-border-color": "#78818a",
+            "--input-focus-box-shadow": "0 0 0 0.2rem rgba(141, 143, 146, 0.25)",
         },
         light: {
-            '--base-text-color': '#212529',
-            '--header-bg': '#fff',
-            '--header-text-color': '#212529',
-            '--default-btn-bg': '#fff',
-            '--default-btn-text-color': '#212529',
-            '--default-btn-hover-bg': '#e8e7e7',
-            '--default-btn-border-color': '#343a40',
-            '--default-btn-focus-box-shadow': '0 0 0 0.2rem rgba(141, 143, 146, 0.25)',
-            '--danger-btn-bg': '#f1b5bb',
-            '--danger-btn-text-color': '#212529',
-            '--danger-btn-hover-bg': '#ef808a',
-            '--danger-btn-border-color': '#e2818a',
-            '--input-border-color': '#ced4da',
-            '--input-bg-color': '#fff',
-            '--input-text-color': '#495057',
-            '--input-focus-bg-color': '#fff',
-            '--input-focus-text-color': '#495057',
-            '--input-focus-border-color': '#78818a',
-            '--input-focus-box-shadow': '0 0 0 0.2rem rgba(141, 143, 146, 0.25)',
+            "--base-text-color": "#212529",
+            "--header-bg": "#fff",
+            "--header-text-color": "#212529",
+            "--default-btn-bg": "#fff",
+            "--default-btn-text-color": "#212529",
+            "--default-btn-hover-bg": "#e8e7e7",
+            "--default-btn-border-color": "#343a40",
+            "--default-btn-focus-box-shadow": "0 0 0 0.2rem rgba(141, 143, 146, 0.25)",
+            "--danger-btn-bg": "#f1b5bb",
+            "--danger-btn-text-color": "#212529",
+            "--danger-btn-hover-bg": "#ef808a",
+            "--danger-btn-border-color": "#e2818a",
+            "--input-border-color": "#ced4da",
+            "--input-bg-color": "#fff",
+            "--input-text-color": "#495057",
+            "--input-focus-bg-color": "#fff",
+            "--input-focus-text-color": "#495057",
+            "--input-focus-border-color": "#78818a",
+            "--input-focus-box-shadow": "0 0 0 0.2rem rgba(141, 143, 146, 0.25)",
         },
     };
 
-    let lastSelectedTheme = 'default';
+    let lastSelectedTheme = localStorage.getItem('app_theme') || 'default';
 
     // Elements UI
-    const listContainer = document.querySelector('.tasks-list-section .list-group');
-    const form = document.forms['addTask'];
-    const inputTitle = form.elements['title'];
-    const inputBody = form.elements['body'];
-    const themeSelect = document.getElementById('themeSelect');
-
+    const listContainer = document.querySelector(
+        ".tasks-list-section .list-group"
+    );
+    const form = document.forms["addTask"];
+    const inputTitle = form.elements["title"];
+    const inputBody = form.elements["body"];
+    const themeSelect = document.getElementById("themeSelect");
 
     // Events
+    setTheme(lastSelectedTheme);
     renderAllTasks(objOfTasks);
-    form.addEventListener('submit', onFormSubmitHandler);
-    listContainer.addEventListener('click', onDeleteHandler);
-    listContainer.addEventListener('click', onCompleteHandler);
-    themeSelect.addEventListener('change', onThemeSeletHandler);
+    form.addEventListener("submit", onFormSubmitHandler);
+    listContainer.addEventListener("click", onDeleteHandler);
+    listContainer.addEventListener("click", onCompleteHandler);
+    themeSelect.addEventListener("change", onThemeSeletHandler);
 
     function renderAllTasks(tasksList) {
         if (!tasksList) {
-            console.error('Put list of tasks!');
+            console.error("Put list of tasks!");
             return;
         }
 
         const fragment = document.createDocumentFragment();
-        Object.values(tasksList).forEach(task => {
+        Object.values(tasksList).forEach((task) => {
             const li = listItemTemplate(task);
             fragment.appendChild(li);
         });
@@ -139,29 +141,35 @@ const tasks = [{
         title,
         body
     } = {}) {
-        const li = document.createElement('li');
-        li.classList.add('list-group-item', 'd-flex', 'align-item-center', 'flex-wrap', 'mt-2');
+        const li = document.createElement("li");
+        li.classList.add(
+            "list-group-item",
+            "d-flex",
+            "align-item-center",
+            "flex-wrap",
+            "mt-2"
+        );
         li.dataset.taskId = _id;
 
-        const span = document.createElement('span');
+        const span = document.createElement("span");
         span.textContent = title;
-        span.style.fontWeight = 'bold';
+        span.style.fontWeight = "bold";
 
-        const btnContainer = document.createElement('div');
-        btnContainer.classList.add('ml-auto');
+        const btnContainer = document.createElement("div");
+        btnContainer.classList.add("ml-auto");
 
-        const completeBtn = document.createElement('button');
-        completeBtn.textContent = 'Complete task';
-        completeBtn.classList.add('btn', 'btn-success', 'complete-btn');
-        completeBtn.style.marginRight = '5px';
+        const completeBtn = document.createElement("button");
+        completeBtn.textContent = "Complete task";
+        completeBtn.classList.add("btn", "btn-success", "complete-btn");
+        completeBtn.style.marginRight = "5px";
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Delete task';
-        deleteBtn.classList.add('btn', 'btn-danger', 'ml-auto', 'delete-btn');
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete task";
+        deleteBtn.classList.add("btn", "btn-danger", "ml-auto", "delete-btn");
 
-        const article = document.createElement('p');
+        const article = document.createElement("p");
         article.textContent = body;
-        article.classList.add('mt-2', 'w-100');
+        article.classList.add("mt-2", "w-100");
 
         li.appendChild(span);
         btnContainer.appendChild(completeBtn);
@@ -178,13 +186,13 @@ const tasks = [{
         const bodyValue = inputBody.value;
 
         if (!titleValue || !bodyValue) {
-            alert('Enter Title and Body of Form');
+            alert("Enter Title and Body of Form");
             return;
         }
 
         const task = createNewTask(titleValue, bodyValue);
         const listItem = listItemTemplate(task);
-        listContainer.insertAdjacentElement('afterbegin', listItem);
+        listContainer.insertAdjacentElement("afterbegin", listItem);
         form.reset();
     }
 
@@ -193,13 +201,13 @@ const tasks = [{
             title,
             body,
             complited: false,
-            _id: `task-${parseInt(Math.random()*1000000)}`,
+            _id: `task-${parseInt(Math.random() * 1000000)}`,
         };
 
         objOfTasks[newTask._id] = newTask;
 
         return {
-            ...newTask
+            ...newTask,
         };
     }
 
@@ -221,8 +229,8 @@ const tasks = [{
     function onDeleteHandler({
         target
     }) {
-        if (target.classList.contains('delete-btn')) {
-            const parent = target.closest('[data-task-id]');
+        if (target.classList.contains("delete-btn")) {
+            const parent = target.closest("[data-task-id]");
             const id = parent.dataset.taskId;
             const confirmed = deleteTask(id);
             deleteTaskFromHtml(confirmed, parent);
@@ -232,12 +240,11 @@ const tasks = [{
     function onCompleteHandler({
         target
     }) {
-        if (target.classList.contains('complete-btn')) {
-            const parent = target.closest('[data-task-id]');
-            parent.classList.toggle('completed');
-            target.classList.toggle('btn-success');
-            target.classList.toggle('btn-secondary');
-
+        if (target.classList.contains("complete-btn")) {
+            const parent = target.closest("[data-task-id]");
+            parent.classList.toggle("completed");
+            target.classList.toggle("btn-success");
+            target.classList.toggle("btn-secondary");
         }
     }
 
@@ -250,6 +257,7 @@ const tasks = [{
         }
         setTheme(selectedTheme);
         lastSelectedTheme = selectedTheme;
+        localStorage.setItem("app_theme", selectedTheme);
     }
 
     function setTheme(name) {
@@ -258,4 +266,4 @@ const tasks = [{
             document.documentElement.style.setProperty(key, value);
         });
     }
-}(tasks));
+})(tasks);

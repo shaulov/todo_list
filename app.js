@@ -175,13 +175,13 @@ const tasks = [{
         article.textContent = body;
         article.classList.add("mt-2", "w-100");
 
-        if (complited) li.classList.add('completed');
-
         li.appendChild(span);
         btnContainer.appendChild(completeBtn);
         btnContainer.appendChild(deleteBtn);
         li.appendChild(btnContainer);
         li.appendChild(article);
+
+        if (complited) completeTask(li);
 
         return li;
     }
@@ -245,14 +245,20 @@ const tasks = [{
         }
     }
 
+    function completeTask(el) {
+        el.classList.add("completed");
+        const completeBtn = el.children[1].firstElementChild;
+        completeBtn.classList.add('disabled');
+    }
+
     function onCompleteHandler({
         target
     }) {
         if (target.classList.contains("complete-btn")) {
             const parent = target.closest("[data-task-id]");
-            parent.classList.toggle("completed");
-            target.classList.toggle("btn-success");
-            target.classList.toggle("btn-secondary");
+            const id = parent.dataset.taskId;
+            objOfTasks[id].complited = true;
+            completeTask(parent);
         }
     }
 

@@ -29,7 +29,7 @@ const tasks = [{
         complited: false,
         body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
         title: "Pablo Hernandes Juan Escobars",
-    },
+    }
 ];
 
 (function (arrOfTasks) {
@@ -103,7 +103,7 @@ const tasks = [{
         },
     };
 
-    let lastSelectedTheme = localStorage.getItem('app_theme') || 'default';
+    let lastSelectedTheme = localStorage.getItem("app_theme") || "default";
 
     // Elements UI
     const listContainer = document.querySelector(
@@ -113,6 +113,8 @@ const tasks = [{
     const inputTitle = form.elements["title"];
     const inputBody = form.elements["body"];
     const themeSelect = document.getElementById("themeSelect");
+    const taskSection = document.getElementById('task-section');
+    const messageAboutEmpty = taskSection.nextElementSibling;
 
     // Events
     setTheme(lastSelectedTheme);
@@ -127,19 +129,21 @@ const tasks = [{
             console.error("Put list of tasks!");
             return;
         }
-
         const fragment = document.createDocumentFragment();
         Object.values(tasksList).forEach((task) => {
             const li = listItemTemplate(task);
+            // if (task.complited) li.classList.add('completed');
             fragment.appendChild(li);
         });
         listContainer.appendChild(fragment);
+        checkEmptiness();
     }
 
     function listItemTemplate({
         _id,
         title,
-        body
+        body,
+        complited
     } = {}) {
         const li = document.createElement("li");
         li.classList.add(
@@ -171,6 +175,8 @@ const tasks = [{
         article.textContent = body;
         article.classList.add("mt-2", "w-100");
 
+        if (complited) li.classList.add('completed');
+
         li.appendChild(span);
         btnContainer.appendChild(completeBtn);
         btnContainer.appendChild(deleteBtn);
@@ -194,6 +200,7 @@ const tasks = [{
         const listItem = listItemTemplate(task);
         listContainer.insertAdjacentElement("afterbegin", listItem);
         form.reset();
+        checkEmptiness();
     }
 
     function createNewTask(title, body) {
@@ -224,6 +231,7 @@ const tasks = [{
     function deleteTaskFromHtml(confirmed, el) {
         if (!confirmed) return;
         el.remove();
+        checkEmptiness();
     }
 
     function onDeleteHandler({
@@ -265,5 +273,14 @@ const tasks = [{
         Object.entries(selectedThemeObj).forEach(([key, value]) => {
             document.documentElement.style.setProperty(key, value);
         });
+    }
+
+    function checkEmptiness() {
+        if (!taskSection.firstElementChild) {
+            messageAboutEmpty.classList.remove('d-none');
+        } else {
+            messageAboutEmpty.classList.add('d-none');
+        }
+
     }
 })(tasks);

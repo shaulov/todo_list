@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDo List</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -29,10 +29,12 @@
                             <h5 class="card-title">Add new task</h5>
                             <form name="addTask">
                                 <input type="text" name="title" id="title" class="form-control"
-                                    placeholder="Task title">
+                                    placeholder="Task title" />
                                 <input type="text" name="body" id="body" class="form-control mt-3"
-                                    placeholder="Task body">
-                                <button type="submit" class="btn btn-primary mt-4">Add task</button>
+                                    placeholder="Task body" />
+                                <button type="submit" class="btn btn-primary mt-4">
+                                    Add task
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -42,12 +44,18 @@
     </div>
     <div class="tasks-list-section mt-5">
         <div class="container">
-            <ul id="task-section" class="list-group">
-            </ul>
-            <div class="alert alert-primary d-none">
+            <div>
+                <button class="btn btn-light all-task-btn active">All Tasks</button>
+                <button class="btn btn-light uncompleted-task-btn">Uncompleted Tasks</button>
+            </div>
+            <br>
+            <ul id="all-task-list" class="list-group"></ul>
+            <ul id="uncompleted-task" class="list-group d-none"></ul>
+            <div class="empty-msg alert alert-primary d-none">
                 <h4 class="alert-heading">No tasks</h4>
                 <p>You don't have any active tasks right now</p>
             </div>
+            <br><br>
         </div>
     </div>
     <script src="app.js"></script>

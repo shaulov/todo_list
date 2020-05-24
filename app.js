@@ -2,15 +2,15 @@
 // List of tasks
 const tasks = [{
         _id: "000001",
-        complited: true,
+        complited: false,
         body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
-        title: "Quod commodi",
+        title: "Посмотреть Маяк",
     },
     {
         _id: "000002",
         complited: false,
         body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
-        title: "Mollitia, quod commodi",
+        title: "Поменять taskList на taskList",
     },
     {
         _id: "000003",
@@ -29,7 +29,7 @@ const tasks = [{
         complited: false,
         body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
         title: "Pablo Hernandes Juan Escobars",
-    }
+    },
 ];
 
 (function (arrOfTasks) {
@@ -106,15 +106,15 @@ const tasks = [{
     let lastSelectedTheme = localStorage.getItem("app_theme") || "default";
 
     // Elements UI
-    const listContainer = document.querySelector(
-        ".tasks-list-section .list-group"
-    );
+    const listContainer = document.querySelector("#all-task-list");
     const form = document.forms["addTask"];
     const inputTitle = form.elements["title"];
     const inputBody = form.elements["body"];
     const themeSelect = document.getElementById("themeSelect");
-    const taskSection = document.getElementById('task-section');
-    const messageAboutEmpty = taskSection.nextElementSibling;
+    const uncompletedTaskList = document.getElementById('uncompleted-task');
+    const messageAboutEmpty = document.querySelector('.empty-msg');
+    const allTaskBtn = document.querySelector(".all-task-btn");
+    const uncompeltedTaskBtn = document.querySelector(".uncompleted-task-btn");
 
     // Events
     setTheme(lastSelectedTheme);
@@ -123,6 +123,8 @@ const tasks = [{
     listContainer.addEventListener("click", onDeleteHandler);
     listContainer.addEventListener("click", onCompleteHandler);
     themeSelect.addEventListener("change", onThemeSeletHandler);
+    allTaskBtn.addEventListener('click', showAllTasks);
+    uncompeltedTaskBtn.addEventListener("click", showUncompletedTasks);
 
     function renderAllTasks(tasksList) {
         if (!tasksList) {
@@ -132,12 +134,17 @@ const tasks = [{
         const fragment = document.createDocumentFragment();
         Object.values(tasksList).forEach((task) => {
             const li = listItemTemplate(task);
-            // if (task.complited) li.classList.add('completed');
             fragment.appendChild(li);
+            // if (!li.classList.contains('completed')) renderUncompletedTasks(li);
         });
         listContainer.appendChild(fragment);
         checkEmptiness();
     }
+
+    // function renderUncompletedTasks(el) {
+    //     const li = el;
+    //     uncompletedTaskList.appendChild(li);
+    // }
 
     function listItemTemplate({
         _id,
@@ -248,7 +255,7 @@ const tasks = [{
     function completeTask(el) {
         el.classList.add("completed");
         const completeBtn = el.children[1].firstElementChild;
-        completeBtn.classList.add('disabled');
+        completeBtn.classList.add("disabled");
     }
 
     function onCompleteHandler({
@@ -282,11 +289,24 @@ const tasks = [{
     }
 
     function checkEmptiness() {
-        if (!taskSection.firstElementChild) {
-            messageAboutEmpty.classList.remove('d-none');
+        if (!listContainer.firstElementChild) {
+            messageAboutEmpty.classList.remove("d-none");
         } else {
-            messageAboutEmpty.classList.add('d-none');
+            messageAboutEmpty.classList.add("d-none");
         }
+    }
 
+    function showAllTasks() {
+        allTaskBtn.classList.add("active");
+        uncompeltedTaskBtn.classList.remove("active");
+        listContainer.classList.remove('d-none');
+        uncompletedTaskList.classList.add('d-none')
+    }
+
+    function showUncompletedTasks() {
+        allTaskBtn.classList.remove("active");
+        uncompeltedTaskBtn.classList.add("active");
+        uncompletedTaskList.classList.remove('d-none')
+        listContainer.classList.add('d-none');
     }
 })(tasks);

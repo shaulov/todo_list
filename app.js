@@ -2,31 +2,31 @@
 // List of tasks
 const tasks = [{
         _id: "000001",
-        complited: false,
+        completed: false,
         body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
         title: "Посмотреть Маяк",
     },
     {
         _id: "000002",
-        complited: false,
+        completed: true,
         body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
         title: "Поменять taskList на taskList",
     },
     {
         _id: "000003",
-        complited: false,
+        completed: false,
         body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
         title: "Collitia, quod commodi",
     },
     {
         _id: "000004",
-        complited: true,
+        completed: true,
         body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
         title: "Commodi mollitia, quod",
     },
     {
         _id: "000005",
-        complited: false,
+        completed: false,
         body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
         title: "Pablo Hernandes Juan Escobars",
     },
@@ -106,13 +106,12 @@ const tasks = [{
     let lastSelectedTheme = localStorage.getItem("app_theme") || "default";
 
     // Elements UI
-    const listContainer = document.querySelector("#all-task-list");
+    const listContainer = document.querySelector("#task-list");
     const form = document.forms["addTask"];
     const inputTitle = form.elements["title"];
     const inputBody = form.elements["body"];
     const themeSelect = document.getElementById("themeSelect");
-    const uncompletedTaskList = document.getElementById('uncompleted-task');
-    const messageAboutEmpty = document.querySelector('.empty-msg');
+    const messageAboutEmpty = document.querySelector(".empty-msg");
     const allTaskBtn = document.querySelector(".all-task-btn");
     const uncompeltedTaskBtn = document.querySelector(".uncompleted-task-btn");
 
@@ -123,8 +122,8 @@ const tasks = [{
     listContainer.addEventListener("click", onDeleteHandler);
     listContainer.addEventListener("click", onCompleteHandler);
     themeSelect.addEventListener("change", onThemeSeletHandler);
-    allTaskBtn.addEventListener('click', showAllTasks);
-    uncompeltedTaskBtn.addEventListener("click", showUncompletedTasks);
+    allTaskBtn.addEventListener("click", allTasksBtnHandler);
+    uncompeltedTaskBtn.addEventListener("click", uncompletedTaskBtnHandler);
 
     function renderAllTasks(tasksList) {
         if (!tasksList) {
@@ -132,25 +131,19 @@ const tasks = [{
             return;
         }
         const fragment = document.createDocumentFragment();
-        Object.values(tasksList).forEach((task) => {
+        Object.values(tasksList).forEach(task => {
             const li = listItemTemplate(task);
             fragment.appendChild(li);
-            // if (!li.classList.contains('completed')) renderUncompletedTasks(li);
         });
         listContainer.appendChild(fragment);
         checkEmptiness();
     }
 
-    // function renderUncompletedTasks(el) {
-    //     const li = el;
-    //     uncompletedTaskList.appendChild(li);
-    // }
-
     function listItemTemplate({
         _id,
         title,
         body,
-        complited
+        completed
     } = {}) {
         const li = document.createElement("li");
         li.classList.add(
@@ -188,7 +181,7 @@ const tasks = [{
         li.appendChild(btnContainer);
         li.appendChild(article);
 
-        if (complited) completeTask(li);
+        if (completed) completeTask(li);
 
         return li;
     }
@@ -214,7 +207,7 @@ const tasks = [{
         const newTask = {
             title,
             body,
-            complited: false,
+            completed: false,
             _id: `task-${parseInt(Math.random() * 1000000)}`,
         };
 
@@ -264,7 +257,7 @@ const tasks = [{
         if (target.classList.contains("complete-btn")) {
             const parent = target.closest("[data-task-id]");
             const id = parent.dataset.taskId;
-            objOfTasks[id].complited = true;
+            objOfTasks[id].completed = true;
             completeTask(parent);
         }
     }
@@ -296,17 +289,32 @@ const tasks = [{
         }
     }
 
-    function showAllTasks() {
+    function allTasksBtnHandler() {
         allTaskBtn.classList.add("active");
         uncompeltedTaskBtn.classList.remove("active");
-        listContainer.classList.remove('d-none');
-        uncompletedTaskList.classList.add('d-none')
+        showAllTasks();
     }
 
-    function showUncompletedTasks() {
+    function uncompletedTaskBtnHandler() {
         allTaskBtn.classList.remove("active");
         uncompeltedTaskBtn.classList.add("active");
-        uncompletedTaskList.classList.remove('d-none')
-        listContainer.classList.add('d-none');
+        hideCompletedTask();
+    }
+
+    function showAllTasks() {
+        [...listContainer.children].forEach(item => {
+            item.classList.add('d-flex');
+            item.classList.remove('d-none');
+        });
+    }
+
+    function hideCompletedTask(el) {
+        const completedTasks = el || [...listContainer.children].filter(item => {
+            if (item.classList.contains('completed')) return item;
+        });
+        [...completedTasks].forEach(item => {
+            item.classList.remove('d-flex');
+            item.classList.add('d-none');
+        });
     }
 })(tasks);

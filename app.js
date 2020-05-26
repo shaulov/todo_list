@@ -8,24 +8,6 @@ const tasks = [{
     },
     {
         _id: "000002",
-        completed: true,
-        body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
-        title: "Поменять taskList на taskList",
-    },
-    {
-        _id: "000003",
-        completed: false,
-        body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
-        title: "Collitia, quod commodi",
-    },
-    {
-        _id: "000004",
-        completed: true,
-        body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
-        title: "Commodi mollitia, quod",
-    },
-    {
-        _id: "000005",
         completed: false,
         body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
         title: "Pablo Hernandes Juan Escobars",
@@ -33,10 +15,19 @@ const tasks = [{
 ];
 
 (function (arrOfTasks) {
-    const objOfTasks = arrOfTasks.reduce((acc, task) => {
-        acc[task._id] = task;
-        return acc;
-    }, {});
+    let objOfTasks;
+    if (localStorage.getItem("userTask")) {
+        objOfTasks = JSON.parse(localStorage.getItem("userTask"));
+    } else {
+        objOfTasks = arrOfTasks.reduce((acc, task) => {
+            acc[task._id] = task;
+            return acc;
+        }, {});
+    }
+
+    const saveTask = () => {
+        localStorage.setItem("userTask", JSON.stringify(objOfTasks));
+    };
 
     const themes = {
         default: {
@@ -131,7 +122,7 @@ const tasks = [{
             return;
         }
         const fragment = document.createDocumentFragment();
-        Object.values(tasksList).forEach(task => {
+        Object.values(tasksList).forEach((task) => {
             const li = listItemTemplate(task);
             fragment.appendChild(li);
         });
@@ -201,6 +192,7 @@ const tasks = [{
         listContainer.insertAdjacentElement("afterbegin", listItem);
         form.reset();
         checkEmptiness();
+        saveTask();
     }
 
     function createNewTask(title, body) {
@@ -231,7 +223,6 @@ const tasks = [{
     function deleteTaskFromHtml(confirmed, el) {
         if (!confirmed) return;
         el.remove();
-        checkEmptiness();
     }
 
     function onDeleteHandler({
@@ -242,6 +233,8 @@ const tasks = [{
             const id = parent.dataset.taskId;
             const confirmed = deleteTask(id);
             deleteTaskFromHtml(confirmed, parent);
+            checkEmptiness();
+            saveTask();
         }
     }
 
@@ -249,6 +242,7 @@ const tasks = [{
         el.classList.add("completed");
         const completeBtn = el.children[1].firstElementChild;
         completeBtn.classList.add("disabled");
+        if (uncompeltedTaskBtn.classList.contains("active")) hideTask(el);
     }
 
     function onCompleteHandler({
@@ -259,6 +253,7 @@ const tasks = [{
             const id = parent.dataset.taskId;
             objOfTasks[id].completed = true;
             completeTask(parent);
+            saveTask();
         }
     }
 
@@ -302,19 +297,24 @@ const tasks = [{
     }
 
     function showAllTasks() {
-        [...listContainer.children].forEach(item => {
-            item.classList.add('d-flex');
-            item.classList.remove('d-none');
+        [...listContainer.children].forEach((item) => {
+            item.classList.add("d-flex");
+            item.classList.remove("d-none");
         });
     }
 
     function hideCompletedTask(el) {
-        const completedTasks = el || [...listContainer.children].filter(item => {
-            if (item.classList.contains('completed')) return item;
-        });
-        [...completedTasks].forEach(item => {
-            item.classList.remove('d-flex');
-            item.classList.add('d-none');
-        });
+        if (!uncompeltedTaskBtn.classList.contains("active")) return;
+
+        const completedTasks =
+            el || [...listContainer.children].filter((item) => {
+                if (item.classList.contains("completed")) return item;
+            });
+        [...completedTasks].forEach((item) => hideTask(item));
+    }
+
+    function hideTask(task) {
+        task.classList.remove("d-flex");
+        task.classList.add("d-none");
     }
 })(tasks);

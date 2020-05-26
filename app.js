@@ -1,29 +1,7 @@
-// Form
-// List of tasks
-const tasks = [{
-        _id: "000001",
-        completed: false,
-        body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
-        title: "Посмотреть Маяк",
-    },
-    {
-        _id: "000002",
-        completed: false,
-        body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste maxime temporibus recusandae facere corporis, necessitatibus earum officiis illo consectetur quia in modi exercitationem. Minus mollitia molestiae saepe ? Mollitia, quod commodi.",
-        title: "Pablo Hernandes Juan Escobars",
-    },
-];
+// ToDo List
 
-(function (arrOfTasks) {
-    let objOfTasks;
-    if (localStorage.getItem("userTask")) {
-        objOfTasks = JSON.parse(localStorage.getItem("userTask"));
-    } else {
-        objOfTasks = arrOfTasks.reduce((acc, task) => {
-            acc[task._id] = task;
-            return acc;
-        }, {});
-    }
+(function () {
+    const objOfTasks = JSON.parse(localStorage.getItem("userTask")) || {};
 
     const saveTask = () => {
         localStorage.setItem("userTask", JSON.stringify(objOfTasks));
@@ -317,4 +295,4 @@ const tasks = [{
         task.classList.remove("d-flex");
         task.classList.add("d-none");
     }
-})(tasks);
+})();

@@ -102,7 +102,7 @@
         const fragment = document.createDocumentFragment();
         Object.values(tasksList).forEach((task) => {
             const li = listItemTemplate(task);
-            fragment.appendChild(li);
+            li.classList.contains("completed") ? fragment.append(li) : fragment.prepend(li);
         });
         listContainer.appendChild(fragment);
         checkEmptiness();
@@ -244,6 +244,7 @@
                 completeTask(parent, btn);
             }
             saveTask();
+            refreshTaskList();
         }
     }
 
@@ -311,5 +312,10 @@
         Object.entries(selectedThemeObj).forEach(([key, value]) => {
             document.documentElement.style.setProperty(key, value);
         });
+    }
+
+    function refreshTaskList() {
+        listContainer.textContent = '';
+        renderAllTasks(objOfTasks);
     }
 })();

@@ -78,3 +78,7 @@ body {
 .completed {
     background-color: rgba(41, 138, 51, 0.3);
 }
+
+.completed-btn {
+    background-color: rgba(155, 148, 148, 0.705);
+}

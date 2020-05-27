@@ -150,7 +150,7 @@
         li.appendChild(btnContainer);
         li.appendChild(article);
 
-        if (completed) completeTask(li);
+        if (completed) completeTask(li, completeBtn);
 
         return li;
     }
@@ -216,11 +216,17 @@
         }
     }
 
-    function completeTask(el) {
+    function completeTask(el, btn) {
         el.classList.add("completed");
-        const completeBtn = el.children[1].firstElementChild;
-        completeBtn.classList.add("disabled");
+        btn.classList.add("completed-btn");
         if (uncompeltedTaskBtn.classList.contains("active")) hideTask(el);
+    }
+
+    function uncompleteTask(el, btn) {
+        if (!btn.classList.contains('completed-btn')) return;
+        el.classList.remove("completed");
+        btn.classList.remove("completed-btn");
+        if (uncompeltedTaskBtn.classList.contains("active")) showTask(el);
     }
 
     function onCompleteHandler({
@@ -229,36 +235,15 @@
         if (target.classList.contains("complete-btn")) {
             const parent = target.closest("[data-task-id]");
             const id = parent.dataset.taskId;
-            objOfTasks[id].completed = true;
-            completeTask(parent);
+            const btn = target;
+            if (objOfTasks[id].completed) {
+                objOfTasks[id].completed = false;
+                uncompleteTask(parent, btn);
+            } else {
+                objOfTasks[id].completed = true;
+                completeTask(parent, btn);
+            }
             saveTask();
-        }
-    }
-
-    function onThemeSeletHandler(e) {
-        const selectedTheme = themeSelect.value;
-        const isConfirmed = confirm(`Do you want change theme '${selectedTheme}'`);
-        if (!isConfirmed) {
-            themeSelect.value = lastSelectedTheme;
-            return;
-        }
-        setTheme(selectedTheme);
-        lastSelectedTheme = selectedTheme;
-        localStorage.setItem("app_theme", selectedTheme);
-    }
-
-    function setTheme(name) {
-        const selectedThemeObj = themes[name];
-        Object.entries(selectedThemeObj).forEach(([key, value]) => {
-            document.documentElement.style.setProperty(key, value);
-        });
-    }
-
-    function checkEmptiness() {
-        if (!listContainer.firstElementChild) {
-            messageAboutEmpty.classList.remove("d-none");
-        } else {
-            messageAboutEmpty.classList.add("d-none");
         }
     }
 
@@ -294,5 +279,37 @@
     function hideTask(task) {
         task.classList.remove("d-flex");
         task.classList.add("d-none");
+    }
+
+    function showTask(task) {
+        task.classList.add("d-flex");
+        task.classList.remove("d-none");
+    }
+
+    function checkEmptiness() {
+        if (!listContainer.firstElementChild) {
+            messageAboutEmpty.classList.remove("d-none");
+        } else {
+            messageAboutEmpty.classList.add("d-none");
+        }
+    }
+
+    function onThemeSeletHandler(e) {
+        const selectedTheme = themeSelect.value;
+        const isConfirmed = confirm(`Do you want change theme '${selectedTheme}'`);
+        if (!isConfirmed) {
+            themeSelect.value = lastSelectedTheme;
+            return;
+        }
+        setTheme(selectedTheme);
+        lastSelectedTheme = selectedTheme;
+        localStorage.setItem("app_theme", selectedTheme);
+    }
+
+    function setTheme(name) {
+        const selectedThemeObj = themes[name];
+        Object.entries(selectedThemeObj).forEach(([key, value]) => {
+            document.documentElement.style.setProperty(key, value);
+        });
     }
 })();
